@@ -1,0 +1,23 @@
+{
+  "name": "veff-project-02",
+  "version": "1.0.0",
+  "description": "Web programming project 02",
+  "main": "./src/logic/main.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/egilltor17/VEFF-Project02.git"
+  },
+  "author": "Egill",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/egilltor17/VEFF-Project02/issues"
+  },
+  "homepage": "https://github.com/egilltor17/VEFF-Project02#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0"
+  }
+}
