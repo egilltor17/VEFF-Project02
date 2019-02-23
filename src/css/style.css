@@ -1,1 +1,67 @@
 /* Project02/src/css/style.css */
+
+table {
+    border-collapse: collapse;
+    margin: auto;
+    height: 700px;
+    width: 700px;
+  }
+
+td {
+    border: 1px solid black;
+    height: 29px;
+    width: 26px;
+    /* height: calc(1/9);
+    width: calc(1/9); */
+    text-align: center;
+}
+
+input {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    border: none;
+    font-size: 1.2rem;
+    background: none;
+}
+
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+
+.row1 {
+    background-color: palegoldenrod;
+}
+
+.row2 {
+    background-color: orange;
+}
+
+.row3 {
+    background-color: tomato;
+}
+
+.row4 {
+    background-color: orangered;
+}
+
+.row5 {
+    background-color: purple;
+}
+
+.row6 {
+    background-color: blueviolet
+}
+
+.row7 {
+    background-color: steelblue;
+}
+
+.row8 {
+    background-color: seagreen;
+}
+
+.row9 {
+    background-color: palegreen;
+}

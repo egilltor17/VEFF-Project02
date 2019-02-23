@@ -2,6 +2,8 @@
 
 const chai = require("chai");
 const main = require("../src/logic/main");
+// import { expect } from chai;
+// import {add} from "../src/logic/main" ;
 
 describe('dummy tests', () => {
     it('add', () => {
