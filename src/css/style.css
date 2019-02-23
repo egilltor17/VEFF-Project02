@@ -11,8 +11,6 @@ td {
     border: 1px solid black;
     height: 29px;
     width: 26px;
-    /* height: calc(1/9);
-    width: calc(1/9); */
     text-align: center;
 }
 
@@ -28,6 +26,10 @@ input[type = number] {
 input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { 
     -webkit-appearance: none; 
     margin: 0; 
+}
+
+.box1 .box2 .box3 .box4 .box5 .box6 .box7 .box8 .box9 {
+    border: 3px solid black;
 }
 
 .row1 {
