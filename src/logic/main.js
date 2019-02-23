@@ -9,22 +9,26 @@ function testClick(boxNr, cellNr) {
     console.log(cell);
     document.getElementById(cell).style.backgroundColor = "black";
 }
-function sendAjaxRequest(){
+function generateBoard(){
+    difficulty = document.getElementById('difficulty');
+    SendSudokuRequest(difficulty.value);
+
+}
+function SendSudokuRequest(dif){
     //Prepare the parameter value for 'myParam'
-    var paramValue = document.getElementById('difficulty').value;
 
     //The URL to which we will send the request
     var url = 'https://veff213-sudoku.herokuapp.com/api/v1/sudoku/';
 
-    var res;
+    let res;
 
     //Perform an AJAX POST request to the url, and set the param 'myParam' in the request body to paramValue
-    axios.post(url, { difficulty: paramValue })
+    axios.post(url, { difficulty: dif })
         .then(function (response) {
             //When successful, print 'Success: ' and the received data
             res = response;
             console.log("Success: ", response.data);
-            console.log(response);
+            // console.log(response);
             
         })
         .catch(function (error) {
@@ -44,7 +48,8 @@ if (typeof(module) !== 'undefined' && typeof(module.exports) !== 'undefined') {
     module.exports = {
         add,
         testClick,
-        sendAjaxRequest,
+        SendSudokuRequest,
+        generateBoard,
     } 
 } else {
     // window.testClick = testClick;

@@ -15,7 +15,8 @@
             <option value="medium">medium</option>
             <option value="hard">hard</option>
         </select>
-        <input type="button" value="generate" onclick="sendAjaxRequest()">
+        <!-- <input type="button" value="generate" onclick="generateBoard()"> -->
+        <button type="button" onclick="generateBoard()">generate</button>
     </form>
 
     <form action="">
@@ -121,7 +122,7 @@
             </tr>
         </table>
     </form>
-    <div id="showBoardId"></div>
+    <div id="resultMSG"></div>
 </body>
 <script src="../logic/main.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
