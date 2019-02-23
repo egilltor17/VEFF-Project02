@@ -9,27 +9,15 @@ function testClick(boxNr, cellNr) {
     console.log(cell);
     document.getElementById(cell).style.backgroundColor = "black";
 }
-
-
-if (typeof(module) !== 'undefined' && typeof(module.exports) !== 'undefined') { 
-    module.exports = {
-        add,
-        testClick,
-    } 
-} else {
-    // window.testClick = testClick;
-}
-
-
 function sendAjaxRequest(){
     //Prepare the parameter value for 'myParam'
-    var paramValue = getElementById("difficulty").value;
+    var paramValue = document.getElementById('difficulty').value;
 
     //The URL to which we will send the request
-    var url = 'http://someinvaliddomain.is';
+    var url = 'https://veff213-sudoku.herokuapp.com/api/v1/sudoku/';
 
     //Perform an AJAX POST request to the url, and set the param 'myParam' in the request body to paramValue
-    axios.post(url, { myParam: paramValue })
+    axios.post(url, { difficulty: paramValue })
         .then(function (response) {
             //When successful, print 'Success: ' and the received data
             console.log("Success: ", response.data);
@@ -42,3 +30,17 @@ function sendAjaxRequest(){
             // This code is always executed, independent of whether the request succeeds or fails.
         });
 }
+
+
+if (typeof(module) !== 'undefined' && typeof(module.exports) !== 'undefined') { 
+    module.exports = {
+        add,
+        testClick,
+        sendAjaxRequest,
+    } 
+} else {
+    // window.testClick = testClick;
+}
+
+
+
