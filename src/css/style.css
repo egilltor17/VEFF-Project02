@@ -16,7 +16,7 @@ td {
     text-align: center;
 }
 
-input {
+input[type = number] {
     height: 100%;
     width: 100%;
     text-align: center;
