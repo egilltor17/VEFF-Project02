@@ -28,17 +28,17 @@ async function sendSudokuRequest(dif){
 
     //Perform an AJAX POST request to the url, and set the param 'myParam' in the request body to paramValue
     axios.post(url, { difficulty: dif })
-        .then(function (res) {
+        .then((res) => {
             //When successful, print 'Success: ' and the received data
             // console.log("Success: ", response.data);
             // responce = res;
             _responce = res;
         })
-        .catch(function (error) {
+        .catch((error) => {
             //When unsuccessful, print the error.
             console.log(error);
         })
-        .then(function () {
+        .then(() => {
             // This code is always executed, independent of whether the request succeeds or fails.
             // return responce; 
         });
@@ -73,26 +73,59 @@ function clearBoard() {
 }
 
 function fillBoard(responce) {
+    var boxes;
     if(checkResponse(responce)) {
-        for(var i = 0; i < 9; i++){
-            for(var j = 0; j < 9; j++) {
-                if(responce.data.board.boxes[i][j] !== ".") {
-                    cell = "cell" + (String)(i+1) + (String)(j+1);
-                    document.getElementById(cell).value = (Number)(responce.data.board.boxes[i][j]);
-                    document.getElementById(cell).style.backgroundColor = "lightgray";
-                    document.getElementById(cell).disabled = true;
-                }
-            }
-        }
-        return true;
+        boxes = responce.data.board;
     } else {
         // ToDo: use generic board;
-        return false;
+        var difficulty = document.getElementById('difficulty').value;
+        if(difficulty === "easy") {
+            boxes = [["5", "6", "4", ".", ".", "3", "2", ".", "1"], 
+                     ["8", "7", "2", ".", "1", ".", "3", "9", "."], 
+                     ["3", "9", "1", ".", ".", ".", ".", ".", "5"],
+                     ["4", "2", "9", "6", "5", "7", "3", "1", "8"],
+                     [".", ".", "8", "2", "3", "1", "9", "4", "7"],
+                     ["7", "1", "3", "8", "4", "9", "5", "2", "6"],
+                     [".", ".", "6", ".", "3", "5", "8", "4", "2"],
+                     ["4", "2", "3", "7", "8", "9", "1", ".", "."],
+                     [".", "5", "8", "2", "6", "4", "9", "3", "7"]];
+        } else if(difficulty === "medium") {
+            boxes = [["5", "6", "4", ".", ".", "3", "2", ".", "1"], 
+                     [".", ".", ".", ".", ".", ".", ".", ".", "."], 
+                     [".", ".", ".", ".", ".", ".", ".", ".", "."],
+                     [".", ".", ".", ".", ".", ".", ".", ".", "."],
+                     [".", ".", ".", ".", ".", ".", ".", ".", "."],
+                     [".", ".", ".", ".", ".", ".", ".", ".", "."],
+                     [".", ".", ".", ".", ".", ".", ".", ".", "."],
+                     [".", ".", ".", ".", ".", ".", ".", ".", "."],
+                     [".", ".", ".", ".", ".", ".", ".", ".", "."]];
+        } else if(difficulty === "hard") {
+            boxes = [["5", "6", "4", ".", ".", "3", "2", ".", "1"], 
+                     [".", ".", ".", ".", ".", ".", ".", ".", "."], 
+                     [".", ".", ".", ".", ".", ".", ".", ".", "."],
+                     [".", ".", ".", ".", ".", ".", ".", ".", "."],
+                     [".", ".", ".", ".", ".", ".", ".", ".", "."],
+                     [".", ".", ".", ".", ".", ".", ".", ".", "."],
+                     [".", ".", ".", ".", ".", ".", ".", ".", "."],
+                     [".", ".", ".", ".", ".", ".", ".", ".", "."],
+                     [".", ".", ".", ".", ".", ".", ".", ".", "."]];
+        }
+        // return false;
+    }
+    for(var i = 0; i < 9; i++){
+        for(var j = 0; j < 9; j++) {
+            if(boxes[i][j] !== ".") {
+                cell = "cell" + (String)(i+1) + (String)(j+1);
+                document.getElementById(cell).value = (Number)(boxes[i][j]);
+                document.getElementById(cell).style.backgroundColor = "lightgray";
+                document.getElementById(cell).disabled = true;
+            }
+        }
     }
 }
 
 function checkResponse(response) {
-    if((typeof(response) !== "object") || (response.status !== 201)) {
+    if((typeof(response) !== "object") || (response.status !== 200)) {
         return false;
     } else if(typeof(response.data) !== "object" || typeof(response.data.board) !== "object") {
         return false;
