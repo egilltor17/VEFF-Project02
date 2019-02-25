@@ -74,10 +74,11 @@ function clearBoard() {
 
 function fillBoard(responce) {
     var boxes;
+    var sudokuId;
     if(checkResponse(responce)) {
-        boxes = responce.data.board;
+        boxes = responce.data.board.boxes;
+        sudokuId = responce.data.board._id;
     } else {
-        // ToDo: use generic board;
         var difficulty = document.getElementById('difficulty').value;
         if(difficulty === "easy") {
             boxes = [["5", "6", "4", ".", ".", "3", "2", ".", "1"], 
@@ -89,6 +90,7 @@ function fillBoard(responce) {
                      [".", ".", "6", ".", "3", "5", "8", "4", "2"],
                      ["4", "2", "3", "7", "8", "9", "1", ".", "."],
                      [".", "5", "8", "2", "6", "4", "9", "3", "7"]];
+            sudokuId = -1;
         } else if(difficulty === "medium") {
             boxes = [["8", "7", ".", ".", "4", ".", "6", "2", "5"], 
                      ["4", "5", ".", ".", "2", ".", ".", "1", "."], 
@@ -99,6 +101,7 @@ function fillBoard(responce) {
                      ["2", ".", "7", "9", "5", "8", "4", ".", "6"],
                      [".", "9", "4", "6", "7", "3", "2", ".", "5"],
                      [".", ".", "5", "1", ".", "4", ".", ".", "."]];
+            sudokuId = -1;
         } else if(difficulty === "hard") {
             boxes = [["4", ".", ".", "9", ".", ".", ".", ".", "."], 
                      [".", ".", ".", ".", "4", ".", ".", ".", "."], 
@@ -109,8 +112,8 @@ function fillBoard(responce) {
                      [".", ".", "1", ".", "8", "4", "2", ".", "."],
                      [".", "8", ".", ".", ".", ".", ".", "5", "4"],
                      ["4", ".", "2", "3", ".", "5", "1", "7", "8"]];
+            sudokuId = -1;
         }
-        // return false;
     }
     for(var i = 0; i < 9; i++){
         for(var j = 0; j < 9; j++) {
@@ -122,10 +125,11 @@ function fillBoard(responce) {
             }
         }
     }
+    document.getElementById("sudokuId").innerText = sudokuId;
 }
 
 function checkResponse(response) {
-    if((typeof(response) !== "object") || (response.status !== 200)) {
+    if((typeof(response) !== "object") || (response.status !== 201)) {
         return false;
     } else if(typeof(response.data) !== "object" || typeof(response.data.board) !== "object") {
         return false;

@@ -16,14 +16,17 @@ describe('sendSudokuRequest()', () => {
 });
 
 describe('fillBoard()', () => {
+    it('add', () => {
+        chai.expect(main.add(4, 5)).to.equal(9);
+    });
     /*it('should return false if responce is valid', () => {
         var res = { status: 201, data: { board: { boxes: [["7", "9", "6", "5", "2", "1", "8", "3", "."], ["7", "9", "6", "5", "2", "1", "8", "3", "."], ["7", "9", "6", "5", "2", "1", "8", "3", "."], ["7", "9", "6", "5", "2", "1", "8", "3", "."], ["7", "9", "6", "5", "2", "1", "8", "3", "."], ["7", "9", "6", "5", "2", "1", "8", "3", "."], ["7", "9", "6", "5", "2", "1", "8", "3", "."], ["7", "9", "6", "5", "2", "1", "8", "3", "."], ["7", "9", "6", "5", "2", "1", "8", "3", "."]] } } };
         chai.expect(main.fillBoard(res)).to.be.true;
-    });*/
+    });
     it('should return false if responce is bad', () => {
         var res = {};
         chai.expect(main.fillBoard(res)).to.be.false;
-    });
+    });*/
 });
 
 describe('checkResponse()', () => {
