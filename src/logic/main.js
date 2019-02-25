@@ -1,6 +1,6 @@
 // Project02/src/logic/main.js
 
-var res;
+var _responce;
 
 function add(a, b) {
     return a + b;
@@ -13,23 +13,26 @@ function testClick(boxNr, cellNr) {
 
 async function generateBoard(){
     var difficulty = document.getElementById('difficulty').value;
+    clearBoard();
     await sendSudokuRequest(difficulty);
-
+    // var responce = await sendSudokuRequest(difficulty);
     await new Promise((resolve, reject) => setTimeout(resolve, 3000));
-    
-    fillBoard();
+    // fillBoard(responce);
+    fillBoard(_responce);
 }
 
 async function sendSudokuRequest(dif){
     //The URL to which we will send the request
+    // var responce;
     var url = 'https://veff213-sudoku.herokuapp.com/api/v1/sudoku/';
 
     //Perform an AJAX POST request to the url, and set the param 'myParam' in the request body to paramValue
     axios.post(url, { difficulty: dif })
-        .then(function (response) {
+        .then(function (res) {
             //When successful, print 'Success: ' and the received data
             // console.log("Success: ", response.data);
-            res = response;
+            // responce = res;
+            _responce = res;
         })
         .catch(function (error) {
             //When unsuccessful, print the error.
@@ -37,11 +40,11 @@ async function sendSudokuRequest(dif){
         })
         .then(function () {
             // This code is always executed, independent of whether the request succeeds or fails.
-            // console.log(res);
-            // return res;
+            // return responce; 
         });
 }
-/*
+
+/*                       --- res stucture ---
     res:
       data:
         board:
@@ -55,15 +58,27 @@ async function sendSudokuRequest(dif){
             6: (9) ["1", ".", "8", ".", ".", ".", "9", "7", "3"]
             7: (9) ["9", "5", "3", "1", ".", "7", "4", ".", "2"]
             8: (9) ["2", ".", "4", "9", ".", ".", ".", ".", "."]
+      status: int_status
 */
 
-function fillBoard() {
-    if(checkResponse(res)) {
+function clearBoard() {
+    for(var i = 0; i < 9; i++){
+        for(var j = 0; j < 9; j++) {
+            cell = "cell" + (String)(i+1) + (String)(j+1);
+            document.getElementById(cell).value = "";
+            document.getElementById(cell).style.background = "none";
+            document.getElementById(cell).disabled = false;
+        }
+    }
+}
+
+function fillBoard(responce) {
+    if(checkResponse(responce)) {
         for(var i = 0; i < 9; i++){
             for(var j = 0; j < 9; j++) {
-                if(res.data.board.boxes[i][j] !== ".") {
+                if(responce.data.board.boxes[i][j] !== ".") {
                     cell = "cell" + (String)(i+1) + (String)(j+1);
-                    document.getElementById(cell).value = (Number)(res.data.board.boxes[i][j]);
+                    document.getElementById(cell).value = (Number)(responce.data.board.boxes[i][j]);
                     document.getElementById(cell).style.backgroundColor = "lightgray";
                     document.getElementById(cell).disabled = true;
                 }
@@ -93,15 +108,30 @@ function checkResponse(response) {
     return true;
 } 
 
+function validateBoard() {
+    var valid = true;
+    // Check blocks
+    for(var i = 0; i < 9; i++) {            // All blocks
+        for(var j = 0; j < 9; j++) {        // All numbers
+            for(var k = j; k < 9; k++) {    // Compared to all other numbers
+
+            }
+        }
+    }
+    // Check rows
+
+    // Check cols
+}
+
 if (typeof(module) !== 'undefined' && typeof(module.exports) !== 'undefined') { 
     module.exports = {
         add,
         testClick,
         sendSudokuRequest,
         generateBoard,
+        clearBoard,
         fillBoard,
         checkResponse,
+        validateBoard,
     } 
-} else {
-    // window.testClick = testClick;
 }
