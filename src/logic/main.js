@@ -1,6 +1,6 @@
 // Project02/src/logic/main.js
 
-var _responce;
+// var _responce;
 
 function add(a, b) {
     return a + b;
@@ -15,15 +15,15 @@ async function generateBoard(){
     var difficulty = document.getElementById('difficulty').value;
     clearBoard();
     await sendSudokuRequest(difficulty);
-    // var responce = await sendSudokuRequest(difficulty);
-    await new Promise((resolve, reject) => setTimeout(resolve, 3000));
-    // fillBoard(responce);
-    fillBoard(_responce);
+    
+    // mawait new Promise((resolve, reject) => setTimeout(resolve, 3000));
+    
+    // fillBoard(_responce);
 }
 
 async function sendSudokuRequest(dif){
     //The URL to which we will send the request
-    // var responce;
+    var responce;
     var url = 'https://veff213-sudoku.herokuapp.com/api/v1/sudoku/';
 
     //Perform an AJAX POST request to the url, and set the param 'myParam' in the request body to paramValue
@@ -32,7 +32,7 @@ async function sendSudokuRequest(dif){
             //When successful, print 'Success: ' and the received data
             // console.log("Success: ", response.data);
             // responce = res;
-            _responce = res;
+            responce = res;
         })
         .catch((error) => {
             //When unsuccessful, print the error.
@@ -41,6 +41,7 @@ async function sendSudokuRequest(dif){
         .then(() => {
             // This code is always executed, independent of whether the request succeeds or fails.
             // return responce; 
+            fillBoard(responce);
         });
 }
 
@@ -148,9 +149,18 @@ function checkResponse(response) {
 function validateBoard() {
     var valid = true;
     // Check blocks
-    for(var i = 0; i < 9; i++) {            // All blocks
+    for(var i = 0; i < 9; i++) {          // All blocks, rows or columns
         for(var j = 0; j < 9; j++) {        // All numbers
-            for(var k = j; k < 9; k++) {    // Compared to all other numbers
+            for(var k = j+1; k < 9; k++) {    // Compared to all other numbers
+                var boxElementA = "cell" + (String)(i+1) + (String)(j+1);
+                var boxElementB = "cell" + (String)(i+1) + (String)(k+1);
+                
+                var rowElementA = "cell" + (String)(Math.floor((j+3)/3) + 3*Math.floor(i/3)) + (String)(3*(i%3) + j%3 + 1);
+                var rowElementB = "cell" + (String)(Math.floor((k+3)/3) + 3*Math.floor(i/3)) + (String)(3*(i%3) + k%3 + 1);
+                
+                var colElementA = "cell" + (String)(Math.floor((i+3)/3) + 3*Math.floor(j/3)) + (String)(3*(j%3) + i%3 +1);
+                var colElementB = "cell" + (String)(Math.floor((i+3)/3) + 3*Math.floor(k/3)) + (String)(3*(k%3) + i%3 +1);
+                
 
             }
         }
@@ -158,6 +168,7 @@ function validateBoard() {
     // Check rows
 
     // Check cols
+    return valid;
 }
 
 if (typeof(module) !== 'undefined' && typeof(module.exports) !== 'undefined') { 
