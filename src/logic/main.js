@@ -160,6 +160,7 @@ function validateBoard() {
                 } else {
                     boxElementA.style.backgroundColor = "red";
                 }
+                valid = false;
             }
             
             for(var k = j+1; k < 9; k++) {    // Compared to all other cells
@@ -167,15 +168,25 @@ function validateBoard() {
                 var rowElementB = document.getElementById("cell" + (String)(Math.floor((k+3)/3) + 3*Math.floor(i/3)) + (String)(3*(i%3) + k%3 + 1));
                 var colElementB = document.getElementById("cell" + (String)(Math.floor((i+3)/3) + 3*Math.floor(k/3)) + (String)(3*(k%3) + i%3 + 1));
                 
-
-
+                if(boxElementA.value != "" && boxElementA.value === boxElementB.value) {
+                    if(!boxElementA.disabled) { boxElementA.style.backgroundColor = "red"; }
+                    if(!boxElementB.disabled) { boxElementB.style.backgroundColor = "red"; }
+                    valid = false;
+                }
+                if(rowElementA.value != "" && rowElementA.value === rowElementB.value) {
+                    if(!rowElementA.disabled) { rowElementA.style.backgroundColor = "red"; }
+                    if(!rowElementB.disabled) { rowElementB.style.backgroundColor = "red"; }
+                    valid = false;
+                }
+                if(colElementA.value != "" && colElementA.value === colElementB.value) {
+                    if(!colElementA.disabled) { colElementA.style.backgroundColor = "red"; }
+                    if(!colElementB.disabled) { colElementB.style.backgroundColor = "red"; }
+                    valid = false;
+                }
 
             }
         }
     }
-    // Check rows
-
-    // Check cols
     return valid;
 }
 
