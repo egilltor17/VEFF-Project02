@@ -3,14 +3,18 @@
 table {
     border-collapse: collapse;
     margin: auto;
-    height: 700px;
-    width: 700px;
+    /* height: 700px; */
+    height: 40rem;
+    /* width: 700px; */
+    width: 40rem;
   }
 
 td {
     border: 1px solid black;
-    height: 29px;
-    width: 26px;
+    /* height: 29px; */
+    height: 11%;
+    /* width: 26px; */
+    width: 11%;
     text-align: center;
 }
 
@@ -28,9 +32,6 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
     margin: 0; 
 }
 
-.sudoku_board {
-    padding: 0px;
-}
 
 .box1, .box2, .box3, .box4, .box5, .box6, .box7, .box8, .box9 {
     /* border: 3px solid black; */
@@ -39,7 +40,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 
 
 
-.row1 {
+/* .row1 {
     background-color: palegoldenrod;
 }
 
@@ -73,7 +74,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 
 .row9 {
     background-color: palegreen;
-}
+} */
 
 .col1, .col4, .col7 {
     border-left: solid 0.15rem black;
