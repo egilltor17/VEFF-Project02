@@ -10,14 +10,14 @@
 </head>
 <body>
     <form action="">
-        <select id="difficulty">
-            <option value="easy">easy</option>
+        <select id="difficultySelector">
+        <option value="easy">easy</option>
             <option value="medium">medium</option>
             <option value="hard">hard</option>
         </select>
         <!-- <input type="button" value="generate" onclick="generateBoard()"> -->
-        <button type="button" onclick="generateBoard()">generate</button>
-        <button type="button" onclick="validateBoard()">validate</button>
+        <button id="generateButton" type="button" onclick="generateBoard()">generate</button>
+        <button id="validateButton" type="button" onclick="validateBoard()">validate</button>
     </form>
 
     <form action="">

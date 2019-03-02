@@ -12,7 +12,7 @@ function testClick(boxNr, cellNr) {
 }
 
 async function generateBoard(){
-    var difficulty = document.getElementById('difficulty').value;
+    var difficulty = document.getElementById('difficultySelector').value;
     clearBoard();
     await sendSudokuRequest(difficulty);
     // var responce = await sendSudokuRequest(difficulty);
@@ -79,7 +79,7 @@ function fillBoard(responce) {
         boxes = responce.data.board.boxes;
         sudokuId = responce.data.board._id;
     } else {
-        var difficulty = document.getElementById('difficulty').value;
+        var difficulty = document.getElementById('difficultySelector').value;
         if(difficulty === "easy") {
             boxes = [["5", "6", "4", ".", ".", "3", "2", ".", "1"], 
                      ["8", "7", "2", ".", "1", ".", "3", "9", "."], 
@@ -151,6 +151,8 @@ function validateBoard() {
     for(var i = 0; i < 9; i++) {            // All blocks
         for(var j = 0; j < 9; j++) {        // All numbers
             for(var k = j; k < 9; k++) {    // Compared to all other numbers
+
+
 
             }
         }
