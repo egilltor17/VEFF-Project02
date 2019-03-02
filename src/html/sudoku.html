@@ -1,5 +1,5 @@
 <!-- Project/src/sudoku.html -->
-<!DOCTYPE <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -9,9 +9,9 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../css/style.css">
 </head>
 <body>
-    <form action="">
+    <form action="../logic/main.js">
         <select id="difficultySelector">
-        <option value="easy">easy</option>
+            <option value="easy">easy</option>
             <option value="medium">medium</option>
             <option value="hard">hard</option>
         </select>
@@ -20,7 +20,7 @@
         <button id="validateButton" type="button" onclick="validateBoard()">validate</button>
     </form>
 
-    <form action="">
+    <form action="../logic/main.js">
         <table class="sudoku_board">
             <tr class="row1">
                 <td class="col1 box1" onclick="testClick(1, 1)"><input type="number" id="cell11" min="1" max="9"></td>
@@ -125,7 +125,7 @@
     </form>
     <p id="sudokuId"></p>
     <div id="resultMSG"></div>
-</body>
 <script src="../logic/main.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</body>
 </html>
