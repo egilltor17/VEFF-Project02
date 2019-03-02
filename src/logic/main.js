@@ -150,17 +150,25 @@ function validateBoard() {
     var valid = true;
     // Check blocks
     for(var i = 0; i < 9; i++) {          // All blocks, rows or columns
-        for(var j = 0; j < 9; j++) {        // All numbers
-            for(var k = j+1; k < 9; k++) {    // Compared to all other numbers
-                var boxElementA = "cell" + (String)(i+1) + (String)(j+1);
-                var boxElementB = "cell" + (String)(i+1) + (String)(k+1);
+        for(var j = 0; j < 9; j++) {        // All cells
+            var boxElementA = document.getElementById("cell" + (String)(i+1) + (String)(j+1));
+            var rowElementA = document.getElementById("cell" + (String)(Math.floor((j+3)/3) + 3*Math.floor(i/3)) + (String)(3*(i%3) + j%3 + 1));
+            var colElementA = document.getElementById("cell" + (String)(Math.floor((i+3)/3) + 3*Math.floor(j/3)) + (String)(3*(j%3) + i%3 + 1));
+            if(!boxElementA.disabled  && (typeof(boxElementA.value) !== "string" || boxElementA.value < 1 || 9 < boxElementA.value)) {
+                if(boxElementA.value == "") {
+                    boxElementA.style.backgroundColor = "yellow";
+                } else {
+                    boxElementA.style.backgroundColor = "red";
+                }
+            }
+            
+            for(var k = j+1; k < 9; k++) {    // Compared to all other cells
+                var boxElementB = document.getElementById("cell" + (String)(i+1) + (String)(k+1));    
+                var rowElementB = document.getElementById("cell" + (String)(Math.floor((k+3)/3) + 3*Math.floor(i/3)) + (String)(3*(i%3) + k%3 + 1));
+                var colElementB = document.getElementById("cell" + (String)(Math.floor((i+3)/3) + 3*Math.floor(k/3)) + (String)(3*(k%3) + i%3 + 1));
                 
-                var rowElementA = "cell" + (String)(Math.floor((j+3)/3) + 3*Math.floor(i/3)) + (String)(3*(i%3) + j%3 + 1);
-                var rowElementB = "cell" + (String)(Math.floor((k+3)/3) + 3*Math.floor(i/3)) + (String)(3*(i%3) + k%3 + 1);
-                
-                var colElementA = "cell" + (String)(Math.floor((i+3)/3) + 3*Math.floor(j/3)) + (String)(3*(j%3) + i%3 +1);
-                var colElementB = "cell" + (String)(Math.floor((i+3)/3) + 3*Math.floor(k/3)) + (String)(3*(k%3) + i%3 +1);
-                
+
+
 
             }
         }
