@@ -127,6 +127,7 @@ function fillBoard(responce) {
         }
     }
     document.getElementById("sudokuId").innerText = sudokuId;
+    startTimer()
 }
 
 function checkResponse(response) {
@@ -145,6 +146,30 @@ function checkResponse(response) {
     }
     return true;
 } 
+
+function startTimer(){
+    time = Date.now();
+    document.getElementById("theTime").innerText = time
+}
+
+function hideTimer(){
+    hideButton = document.getElementById("hide");
+    hide = "Hide Timer";
+    show = "Show Timer";
+    if(hideButton.value == hide){
+        document.getElementById("pause").style.display = "none";
+        document.getElementById("theTime").style.display = "none";
+        hideButton.innerText = show;
+        hideButton.value = show;
+          
+    }
+    else{
+        document.getElementById("theTime").style.display = "initial";
+        document.getElementById("pause").style.display = "initial";
+        hideButton.innerText = hide;  
+        hideButton.value = hide;
+    }
+}
 
 function validateBoard() {
     var valid = true;

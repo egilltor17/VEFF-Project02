@@ -90,3 +90,12 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 .row3, .row6, .row9{
     border-bottom: solid 0.15rem black;
 }
+
+#stopwatchContainer{
+    float: right;
+}
+
+.stopwatch{
+    display: flex;
+    flex-direction: row;
+}

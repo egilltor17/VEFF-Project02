@@ -1,6 +1,7 @@
 <!-- Project/src/sudoku.html -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="../css/style.css">
 </head>
+
 <body>
     <form action="../logic/main.js">
         <select id="difficulty">
@@ -20,6 +22,12 @@
         <button type="button" onclick="validateBoard()">validate</button>
     </form>
 
+    <div class="stopwatch" id="stopwatchContainer">
+        <label for="pause" class="stopwatch" id="theTime">00:00:00</label>
+        <button type="button" class="stopwatch" id="pause" onclick="pauseTimer()">Pause Timer</button>
+        <button type="button" classs="stopwatch" id="hide" onclick="hideTimer()" value="Hide Timer">Hide Timer</button>
+    </div>
+    
     <form action="../logic/main.js">
         <table class="sudoku_board">
             <tr class="row1">
@@ -125,7 +133,8 @@
     </form>
     <p id="sudokuId"></p>
     <div id="resultMSG"></div>
-<script src="../logic/main.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="../logic/main.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </body>
+
 </html>
