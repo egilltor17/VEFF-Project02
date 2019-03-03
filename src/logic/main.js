@@ -1,7 +1,5 @@
 // Project02/src/logic/main.js
 
-// var _responce;
-
 function add(a, b) {
     return a + b;
 }
@@ -148,9 +146,13 @@ function checkResponse(response) {
 
 function resetColor(){
     setTimeout(function background() {
-        inp = document.getElementsByTagName("input")
-        for(var i = 0; i < 81; i++){
-            inp[i].style.backgroundColor = "white";
+        for(var i = 0; i < 9; i++){
+            for(var j = 0; j < 9; j++) {
+                cell = "cell" + (String)(i+1) + (String)(j+1);
+                if(!document.getElementById(cell).disabled) {
+                    document.getElementById(cell).style.background = "none";
+                }
+            }
         }
     },5000);
 }
