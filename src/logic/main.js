@@ -146,6 +146,26 @@ function checkResponse(response) {
     return true;
 } 
 
+function resetColor(){
+    setTimeout(function background() {
+        inp = document.getElementsByTagName("input")
+        for(var i = 0; i < 81; i++){
+            inp[i].style.backgroundColor = "white";
+        }
+    },5000);
+}
+
+function integerTest(boxElementA){
+    var isAnInteger = boxElementA.value % 2;
+    if(isAnInteger != 0 && isAnInteger != 1){
+        isAnInteger = false;
+    }
+    else{
+        isAnInteger = true;
+    }
+    return isAnInteger
+}
+
 function validateBoard() {
     var valid = true;
     // Check blocks
@@ -154,7 +174,8 @@ function validateBoard() {
             var boxElementA = document.getElementById("cell" + (String)(i+1) + (String)(j+1));
             var rowElementA = document.getElementById("cell" + (String)(Math.floor((j+3)/3) + 3*Math.floor(i/3)) + (String)(3*(i%3) + j%3 + 1));
             var colElementA = document.getElementById("cell" + (String)(Math.floor((i+3)/3) + 3*Math.floor(j/3)) + (String)(3*(j%3) + i%3 + 1));
-            if(!boxElementA.disabled  && (typeof(boxElementA.value) !== "number" || boxElementA.value < 1 || 9 < boxElementA.value)) {
+            var isAnInteger = integerTest(boxElementA)
+            if(!boxElementA.disabled  && (/*typeof(boxElementA.value) !== "number" ||*/ boxElementA.value < 1 || 9 < boxElementA.value || !isAnInteger)) {
                 if(boxElementA.value == "") {
                     boxElementA.style.backgroundColor = "yellow";
                 } else {
@@ -189,6 +210,7 @@ function validateBoard() {
             }
         }
     }
+    resetColor();
     return valid;
 }
 
