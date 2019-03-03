@@ -149,7 +149,8 @@ function checkResponse(response) {
 
 function startTimer(){
     time = Date.now();
-    document.getElementById("theTime").innerText = time
+    sessionStorage.setItem("startTime", time);
+    startWorker();
 }
 
 function hideTimer(){
