@@ -3,7 +3,7 @@
 const pastelRed = '#ffc0c0';
 const pastelYellow = '#fffedd';
 
-function add(a, b) {
+function add(a, b) { //function to check whether the tests are working
     return a + b;
 }
 
@@ -13,51 +13,26 @@ async function generateBoard(){
     document.getElementById("resultMSG").innerText = ""
     await sendSudokuRequest(difficulty);
     
-    // mawait new Promise((resolve, reject) => setTimeout(resolve, 3000));
-    
-    // fillBoard(_responce);
 }
 
 async function sendSudokuRequest(dif){
-    //The URL to which we will send the request
     var responce;
+    //The URL to which we will send the request
     var url = 'https://veff213-sudoku.herokuapp.com/api/v1/sudoku/';
 
     //Perform an AJAX POST request to the url, and set the param 'myParam' in the request body to paramValue
     axios.post(url, { difficulty: dif })
         .then((res) => {
-            //When successful, print 'Success: ' and the received data
-            // console.log("Success: ", response.data);
-            // responce = res;
             responce = res;
         })
         .catch((error) => {
-            //When unsuccessful, print the error.
             console.log(error);
         })
         .then(() => {
-            // This code is always executed, independent of whether the request succeeds or fails.
-            // return responce; 
             fillBoard(responce);
         });
 }
 
-/*                       --- res stucture ---
-    res:
-      data:
-        board:
-          boxes: Array(9)
-            0: (9) ["7", "9", "6", "5", "2", "1", "8", "3", "."]
-            1: (9) ["2", "3", "4", "8", "9", "6", "7", "1", "5"]
-            2: (9) [".", "8", ".", "3", "4", "7", "6", "2", "9"]
-            3: (9) ["6", "1", "9", "3", "8", "7", "2", "4", "5"]
-            4: (9) ["3", ".", "8", "5", "2", "1", "6", "7", "9"]
-            5: (9) ["7", "5", "2", "4", "9", "6", ".", ".", "."]
-            6: (9) ["1", ".", "8", ".", ".", ".", "9", "7", "3"]
-            7: (9) ["9", "5", "3", "1", ".", "7", "4", ".", "2"]
-            8: (9) ["2", ".", "4", "9", ".", ".", ".", ".", "."]
-      status: int_status
-*/
 
 function clearBoard() {
     for(var i = 0; i < 9; i++){
@@ -70,13 +45,13 @@ function clearBoard() {
     }
 }
 
-function fillBoard(responce) {
+function fillBoard(responce) { // fill the board with 
     var boxes;
     var sudokuId;
     if(checkResponse(responce)) {
         boxes = responce.data.board.boxes;
         sudokuId = responce.data.board._id;
-    } else {
+    } else { // Set default boards to generate when server is down
         var difficulty = document.getElementById('difficultySelector').value;
         if(difficulty === "easy") {
             boxes = [["5", "6", "4", ".", ".", "3", "2", ".", "1"], 
@@ -143,7 +118,7 @@ function checkResponse(response) {
     return true;
 } 
 
-function resetColor(){
+function resetColor(){ //reset colours with timeout after validate
     setTimeout(function background() {
         for(var i = 0; i < 9; i++){
             for(var j = 0; j < 9; j++) {
@@ -156,14 +131,25 @@ function resetColor(){
     },5000);
 }
 
-function validateBoard() {
+function isInteger(value) { //Check if tile value is a valid integer
+    var isAnInteger = value % 2;
+    if(isAnInteger != 0 && isAnInteger != 1){
+        isAnInteger = false;
+    }
+    else {
+        isAnInteger = true;
+    }
+    return isAnInteger
+}
+
+function validateBoard() { // Check board for all rules
     var valid = true;
     for(var i = 0; i < 9; i++) {          // All blocks, rows or columns
         for(var j = 0; j < 9; j++) {        // All cells
             var boxElementA = document.getElementById("cell" + (String)(i+1) + (String)(j+1));
             var rowElementA = document.getElementById("cell" + (String)(Math.floor((j+3)/3) + 3*Math.floor(i/3)) + (String)(3*(i%3) + j%3 + 1));
             var colElementA = document.getElementById("cell" + (String)(Math.floor((i+3)/3) + 3*Math.floor(j/3)) + (String)(3*(j%3) + i%3 + 1));
-            if(!boxElementA.disabled  && (typeof(Number(boxElementA.value)) !== "number" || boxElementA.value < 1 || 9 < boxElementA.value)) {
+            if(!boxElementA.disabled  && (!isInteger(boxElementA.value) || boxElementA.value < 1 || 9 < boxElementA.value)) {
                 if(boxElementA.value === "") {
                     boxElementA.style.backgroundColor = pastelYellow;
                 } else {
@@ -217,6 +203,6 @@ if (typeof(module) !== 'undefined' && typeof(module.exports) !== 'undefined') {
         checkResponse,
         validateBoard,
         resetColor,
-        validate,
+        isInteger,
     } 
 }

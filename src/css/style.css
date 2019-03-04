@@ -41,13 +41,18 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
     border-top: solid 0.15rem black;
 }
 
-.row3, .row6, .row9{
+.row3, .row6, .row9 {
     border-bottom: solid 0.15rem black;
 }
 
-#resultMSG{
+#resultMSG {
     text-align: center;
 }
-.buttons{
+
+.buttons {
     text-align: center;
+}
+
+#sudokuId {
+    display: none;
 }
