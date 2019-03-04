@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../css/style.css">
 </head>
 <body>
-    <form action="../logic/main.js">
+    <form class = "buttons" action="../logic/main.js">
         <select id="difficultySelector">
             <option value="easy">easy</option>
             <option value="medium">medium</option>
@@ -18,7 +18,7 @@
         <button id="generateButton" type="button" onclick="generateBoard()">generate</button>
         <button id="validateButton" type="button" onclick="validateBoard()">validate</button>
     </form>
-
+    <div id="resultMSG"></div>
     <form action="../logic/main.js">
         <table class="sudoku_board">
             <tr class="row1">
@@ -123,7 +123,6 @@
         </table>
     </form>
     <p id="sudokuId"></p>
-    <div id="resultMSG"></div>
 <script src="../logic/main.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </body>

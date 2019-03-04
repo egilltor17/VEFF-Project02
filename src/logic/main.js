@@ -10,6 +10,7 @@ function add(a, b) {
 async function generateBoard(){
     var difficulty = document.getElementById('difficultySelector').value;
     clearBoard();
+    document.getElementById("resultMSG").innerText = ""
     await sendSudokuRequest(difficulty);
     
     // mawait new Promise((resolve, reject) => setTimeout(resolve, 3000));
@@ -194,7 +195,15 @@ function validateBoard() {
             }
         }
     }
+    console.log(document.getElementById("cell11").value==='');
     resetColor();
+    if(valid){
+        document.getElementById('resultMSG').innerText = "success";
+    }
+    else{
+        document.getElementById('resultMSG').innerText = "incorrect";
+    }
+
     return valid;
 }
 
