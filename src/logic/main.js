@@ -3,10 +3,6 @@
 const pastelRed = '#ffc0c0';
 const pastelYellow = '#fffedd';
 
-function add(a, b) {
-    return a + b;
-}
-
 async function generateBoard(){
     var difficulty = document.getElementById('difficultySelector').value;
     clearBoard();
@@ -26,9 +22,6 @@ async function sendSudokuRequest(dif){
     //Perform an AJAX POST request to the url, and set the param 'myParam' in the request body to paramValue
     axios.post(url, { difficulty: dif })
         .then((res) => {
-            //When successful, print 'Success: ' and the received data
-            // console.log("Success: ", response.data);
-            // responce = res;
             responce = res;
         })
         .catch((error) => {
@@ -36,28 +29,9 @@ async function sendSudokuRequest(dif){
             console.log(error);
         })
         .then(() => {
-            // This code is always executed, independent of whether the request succeeds or fails.
-            // return responce; 
             fillBoard(responce);
         });
 }
-
-/*                       --- res stucture ---
-    res:
-      data:
-        board:
-          boxes: Array(9)
-            0: (9) ["7", "9", "6", "5", "2", "1", "8", "3", "."]
-            1: (9) ["2", "3", "4", "8", "9", "6", "7", "1", "5"]
-            2: (9) [".", "8", ".", "3", "4", "7", "6", "2", "9"]
-            3: (9) ["6", "1", "9", "3", "8", "7", "2", "4", "5"]
-            4: (9) ["3", ".", "8", "5", "2", "1", "6", "7", "9"]
-            5: (9) ["7", "5", "2", "4", "9", "6", ".", ".", "."]
-            6: (9) ["1", ".", "8", ".", ".", ".", "9", "7", "3"]
-            7: (9) ["9", "5", "3", "1", ".", "7", "4", ".", "2"]
-            8: (9) ["2", ".", "4", "9", ".", ".", ".", ".", "."]
-      status: int_status
-*/
 
 function clearBoard() {
     for(var i = 0; i < 9; i++){
@@ -169,8 +143,9 @@ function isInteger(boxElementA) {
 
 function validateBoard() {
     var valid = true;
-    for(var i = 0; i < 9; i++) {          // All blocks, rows or columns
+    for(var i = 0; i < 9; i++) {            // All blocks, rows or columns
         for(var j = 0; j < 9; j++) {        // All cells
+            // the folowing are liniar translations to access the board by boxes, rows and colounms in increasing order
             var boxElementA = document.getElementById("cell" + (String)(i+1) + (String)(j+1));
             var rowElementA = document.getElementById("cell" + (String)(Math.floor((j+3)/3) + 3*Math.floor(i/3)) + (String)(3*(i%3) + j%3 + 1));
             var colElementA = document.getElementById("cell" + (String)(Math.floor((i+3)/3) + 3*Math.floor(j/3)) + (String)(3*(j%3) + i%3 + 1));
@@ -221,7 +196,6 @@ function validateBoard() {
 
 if (typeof(module) !== 'undefined' && typeof(module.exports) !== 'undefined') { 
     module.exports = {
-        add,
         sendSudokuRequest,
         generateBoard,
         clearBoard,
@@ -229,6 +203,5 @@ if (typeof(module) !== 'undefined' && typeof(module.exports) !== 'undefined') {
         checkResponse,
         validateBoard,
         resetColor,
-        validate,
     } 
 }
