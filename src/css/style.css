@@ -1,80 +1,33 @@
 /* Project02/src/css/style.css */
 
 table {
+    margin: 1rem auto;
     border-collapse: collapse;
-    margin: auto;
-    /* height: 700px; */
     height: 40rem;
-    /* width: 700px; */
     width: 40rem;
   }
 
 td {
-    border: 1px solid black;
-    /* height: 29px; */
+    padding: 0px;
+    border: 0.1rem solid black;
     height: 11%;
-    /* width: 26px; */
     width: 11%;
     text-align: center;
 }
 
 input[type = number] {
+    border: none;
     height: 100%;
     width: 100%;
     text-align: center;
-    border: none;
     font-size: 1.2rem;
     background: none;
 }
 
 input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { 
+    margin: 0px; 
     -webkit-appearance: none; 
-    margin: 0; 
 }
-
-
-.box1, .box2, .box3, .box4, .box5, .box6, .box7, .box8, .box9 {
-    /* border: 3px solid black; */
-    padding: 0px;
-}
-
-
-
-/* .row1 {
-    background-color: palegoldenrod;
-}
-
-.row2 {
-    background-color: orange;
-}
-
-.row3 {
-    background-color: tomato;
-}
-
-.row4 {
-    background-color: orangered;
-}
-
-.row5 {
-    background-color: purple;
-}
-
-.row6 {
-    background-color: blueviolet;
-}
-
-.row7 {
-    background-color: steelblue;
-}
-
-.row8 {
-    background-color: seagreen;
-}
-
-.row9 {
-    background-color: palegreen;
-} */
 
 .col1, .col4, .col7 {
     border-left: solid 0.15rem black;

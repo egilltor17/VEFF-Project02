@@ -1,12 +1,8 @@
 // Project02/src/logic/main.js
 
+
 function add(a, b) {
     return a + b;
-}
-
-function testClick(boxNr, cellNr) {
-    var cell = "cell" + boxNr + cellNr;
-    console.log(cell);
 }
 
 async function generateBoard(){
@@ -162,7 +158,7 @@ function integerTest(boxElementA){
     if(isAnInteger != 0 && isAnInteger != 1){
         isAnInteger = false;
     }
-    else{
+    else {
         isAnInteger = true;
     }
     return isAnInteger
@@ -170,14 +166,12 @@ function integerTest(boxElementA){
 
 function validateBoard() {
     var valid = true;
-    // Check blocks
     for(var i = 0; i < 9; i++) {          // All blocks, rows or columns
         for(var j = 0; j < 9; j++) {        // All cells
             var boxElementA = document.getElementById("cell" + (String)(i+1) + (String)(j+1));
             var rowElementA = document.getElementById("cell" + (String)(Math.floor((j+3)/3) + 3*Math.floor(i/3)) + (String)(3*(i%3) + j%3 + 1));
             var colElementA = document.getElementById("cell" + (String)(Math.floor((i+3)/3) + 3*Math.floor(j/3)) + (String)(3*(j%3) + i%3 + 1));
-            var isAnInteger = integerTest(boxElementA)
-            if(!boxElementA.disabled  && (/*typeof(boxElementA.value) !== "number" ||*/ boxElementA.value < 1 || 9 < boxElementA.value || !isAnInteger)) {
+            if(!boxElementA.disabled  && (!isIntegerTest(boxElementA) || boxElementA.value < 1 || 9 < boxElementA.value)) {
                 if(boxElementA.value == "") {
                     boxElementA.style.backgroundColor = "yellow";
                 } else {
@@ -219,7 +213,6 @@ function validateBoard() {
 if (typeof(module) !== 'undefined' && typeof(module.exports) !== 'undefined') { 
     module.exports = {
         add,
-        testClick,
         sendSudokuRequest,
         generateBoard,
         clearBoard,
