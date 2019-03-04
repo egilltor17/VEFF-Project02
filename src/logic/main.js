@@ -1,9 +1,7 @@
 // Project02/src/logic/main.js
 
-// var _responce;
-
-const pastelYellow = '#fffedd';
 const pastelRed = '#ffeddd';
+const pastelYellow = '#fffedd';
 
 function add(a, b) {
     return a + b;
@@ -149,9 +147,28 @@ function checkResponse(response) {
     return true;
 } 
 
-function validate() {
-    validateBoard();
-    setTimeout(function(){resetColours()}, 5000);
+function resetColor(){
+    setTimeout(function background() {
+        for(var i = 0; i < 9; i++){
+            for(var j = 0; j < 9; j++) {
+                cell = "cell" + (String)(i+1) + (String)(j+1);
+                if(!document.getElementById(cell).disabled) {
+                    document.getElementById(cell).style.background = "none";
+                }
+            }
+        }
+    },5000);
+}
+
+function integerTest(boxElementA){
+    var isAnInteger = boxElementA.value % 2;
+    if(isAnInteger != 0 && isAnInteger != 1){
+        isAnInteger = false;
+    }
+    else{
+        isAnInteger = true;
+    }
+    return isAnInteger
 }
 
 function validateBoard() {
@@ -162,7 +179,8 @@ function validateBoard() {
             var boxElementA = document.getElementById("cell" + (String)(i+1) + (String)(j+1));
             var rowElementA = document.getElementById("cell" + (String)(Math.floor((j+3)/3) + 3*Math.floor(i/3)) + (String)(3*(i%3) + j%3 + 1));
             var colElementA = document.getElementById("cell" + (String)(Math.floor((i+3)/3) + 3*Math.floor(j/3)) + (String)(3*(j%3) + i%3 + 1));
-            if(!boxElementA.disabled  && (String(Number(boxElementA.value)) === 'NaN' || boxElementA.value < 1 || 9 < boxElementA.value)) {
+            var isAnInteger = integerTest(boxElementA)
+            if(!boxElementA.disabled  && (/*typeof(boxElementA.value) !== "number" ||*/ boxElementA.value < 1 || 9 < boxElementA.value || !isAnInteger)) {
                 if(boxElementA.value == "") {
                     boxElementA.style.backgroundColor = pastelYellow;
                 } else {
@@ -197,22 +215,10 @@ function validateBoard() {
             }
         }
     }
+    resetColor();
     return valid;
 }
 
-function resetColours(){
-    for(var i = 0; i < 9; i++) {          // All blocks, rows or columns
-        for(var k = 0; k < 9; k++) {  
-            var cell = document.getElementById("cell" + String(i+1) + String(k+1));
-            if(cell.disabled){
-                cell.style.backgroundColor = 'lightgray';
-            }
-            else{
-                cell.style.backgroundColor = 'white';
-            }
-        }
-    }
-}
 
 if (typeof(module) !== 'undefined' && typeof(module.exports) !== 'undefined') { 
     module.exports = {
@@ -224,7 +230,7 @@ if (typeof(module) !== 'undefined' && typeof(module.exports) !== 'undefined') {
         fillBoard,
         checkResponse,
         validateBoard,
-        resetColours,
+        resetColor,
         validate,
     } 
 }
