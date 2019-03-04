@@ -1,5 +1,7 @@
 // Project02/src/logic/main.js
 
+const pastelRed = '#ffc0c0';
+const pastelYellow = '#fffedd';
 
 function add(a, b) {
     return a + b;
@@ -153,7 +155,7 @@ function resetColor(){
     },5000);
 }
 
-function integerTest(boxElementA){
+function isInteger(boxElementA) {
     var isAnInteger = boxElementA.value % 2;
     if(isAnInteger != 0 && isAnInteger != 1){
         isAnInteger = false;
@@ -171,11 +173,11 @@ function validateBoard() {
             var boxElementA = document.getElementById("cell" + (String)(i+1) + (String)(j+1));
             var rowElementA = document.getElementById("cell" + (String)(Math.floor((j+3)/3) + 3*Math.floor(i/3)) + (String)(3*(i%3) + j%3 + 1));
             var colElementA = document.getElementById("cell" + (String)(Math.floor((i+3)/3) + 3*Math.floor(j/3)) + (String)(3*(j%3) + i%3 + 1));
-            if(!boxElementA.disabled  && (!isIntegerTest(boxElementA) || boxElementA.value < 1 || 9 < boxElementA.value)) {
+            if(!boxElementA.disabled  && (!isInteger(boxElementA) || boxElementA.value < 1 || 9 < boxElementA.value)) {
                 if(boxElementA.value == "") {
-                    boxElementA.style.backgroundColor = "yellow";
+                    boxElementA.style.backgroundColor = pastelYellow;
                 } else {
-                    boxElementA.style.backgroundColor = "red";
+                    boxElementA.style.backgroundColor = pastelRed;
                 }
                 valid = false;
             }
@@ -186,18 +188,18 @@ function validateBoard() {
                 var colElementB = document.getElementById("cell" + (String)(Math.floor((i+3)/3) + 3*Math.floor(k/3)) + (String)(3*(k%3) + i%3 + 1));
                 
                 if(boxElementA.value != "" && boxElementA.value === boxElementB.value) {
-                    if(!boxElementA.disabled) { boxElementA.style.backgroundColor = "red"; }
-                    if(!boxElementB.disabled) { boxElementB.style.backgroundColor = "red"; }
+                    if(!boxElementA.disabled) { boxElementA.style.backgroundColor = pastelRed; }
+                    if(!boxElementB.disabled) { boxElementB.style.backgroundColor = pastelRed; }
                     valid = false;
                 }
                 if(rowElementA.value != "" && rowElementA.value === rowElementB.value) {
-                    if(!rowElementA.disabled) { rowElementA.style.backgroundColor = "red"; }
-                    if(!rowElementB.disabled) { rowElementB.style.backgroundColor = "red"; }
+                    if(!rowElementA.disabled) { rowElementA.style.backgroundColor = pastelRed; }
+                    if(!rowElementB.disabled) { rowElementB.style.backgroundColor = pastelRed; }
                     valid = false;
                 }
                 if(colElementA.value != "" && colElementA.value === colElementB.value) {
-                    if(!colElementA.disabled) { colElementA.style.backgroundColor = "red"; }
-                    if(!colElementB.disabled) { colElementB.style.backgroundColor = "red"; }
+                    if(!colElementA.disabled) { colElementA.style.backgroundColor = pastelRed; }
+                    if(!colElementB.disabled) { colElementB.style.backgroundColor = pastelRed; }
                     valid = false;
                 }
 
@@ -210,6 +212,7 @@ function validateBoard() {
     return valid;
 }
 
+
 if (typeof(module) !== 'undefined' && typeof(module.exports) !== 'undefined') { 
     module.exports = {
         add,
@@ -219,5 +222,7 @@ if (typeof(module) !== 'undefined' && typeof(module.exports) !== 'undefined') {
         fillBoard,
         checkResponse,
         validateBoard,
+        resetColor,
+        validate,
     } 
 }
