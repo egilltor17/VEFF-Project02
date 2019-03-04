@@ -2,6 +2,9 @@
 
 // var _responce;
 
+const pastelYellow = '#fffedd';
+const pastelRed = '#ffeddd';
+
 function add(a, b) {
     return a + b;
 }
@@ -146,6 +149,11 @@ function checkResponse(response) {
     return true;
 } 
 
+function validate() {
+    validateBoard();
+    setTimeout(function(){resetColours()}, 5000);
+}
+
 function validateBoard() {
     var valid = true;
     // Check blocks
@@ -154,11 +162,11 @@ function validateBoard() {
             var boxElementA = document.getElementById("cell" + (String)(i+1) + (String)(j+1));
             var rowElementA = document.getElementById("cell" + (String)(Math.floor((j+3)/3) + 3*Math.floor(i/3)) + (String)(3*(i%3) + j%3 + 1));
             var colElementA = document.getElementById("cell" + (String)(Math.floor((i+3)/3) + 3*Math.floor(j/3)) + (String)(3*(j%3) + i%3 + 1));
-            if(!boxElementA.disabled  && (typeof(boxElementA.value) !== "number" || boxElementA.value < 1 || 9 < boxElementA.value)) {
+            if(!boxElementA.disabled  && (String(Number(boxElementA.value)) === 'NaN' || boxElementA.value < 1 || 9 < boxElementA.value)) {
                 if(boxElementA.value == "") {
-                    boxElementA.style.backgroundColor = "yellow";
+                    boxElementA.style.backgroundColor = pastelYellow;
                 } else {
-                    boxElementA.style.backgroundColor = "red";
+                    boxElementA.style.backgroundColor = pastelRed;
                 }
                 valid = false;
             }
@@ -169,18 +177,18 @@ function validateBoard() {
                 var colElementB = document.getElementById("cell" + (String)(Math.floor((i+3)/3) + 3*Math.floor(k/3)) + (String)(3*(k%3) + i%3 + 1));
                 
                 if(boxElementA.value != "" && boxElementA.value === boxElementB.value) {
-                    if(!boxElementA.disabled) { boxElementA.style.backgroundColor = "red"; }
-                    if(!boxElementB.disabled) { boxElementB.style.backgroundColor = "red"; }
+                    if(!boxElementA.disabled) { boxElementA.style.backgroundColor = pastelRed; }
+                    if(!boxElementB.disabled) { boxElementB.style.backgroundColor = pastelRed; }
                     valid = false;
                 }
                 if(rowElementA.value != "" && rowElementA.value === rowElementB.value) {
-                    if(!rowElementA.disabled) { rowElementA.style.backgroundColor = "red"; }
-                    if(!rowElementB.disabled) { rowElementB.style.backgroundColor = "red"; }
+                    if(!rowElementA.disabled) { rowElementA.style.backgroundColor = pastelRed; }
+                    if(!rowElementB.disabled) { rowElementB.style.backgroundColor = pastelRed; }
                     valid = false;
                 }
                 if(colElementA.value != "" && colElementA.value === colElementB.value) {
-                    if(!colElementA.disabled) { colElementA.style.backgroundColor = "red"; }
-                    if(!colElementB.disabled) { colElementB.style.backgroundColor = "red"; }
+                    if(!colElementA.disabled) { colElementA.style.backgroundColor = pastelRed; }
+                    if(!colElementB.disabled) { colElementB.style.backgroundColor = pastelRed; }
                     valid = false;
                 }
 
@@ -190,6 +198,20 @@ function validateBoard() {
         }
     }
     return valid;
+}
+
+function resetColours(){
+    for(var i = 0; i < 9; i++) {          // All blocks, rows or columns
+        for(var k = 0; k < 9; k++) {  
+            var cell = document.getElementById("cell" + String(i+1) + String(k+1));
+            if(cell.disabled){
+                cell.style.backgroundColor = 'lightgray';
+            }
+            else{
+                cell.style.backgroundColor = 'white';
+            }
+        }
+    }
 }
 
 if (typeof(module) !== 'undefined' && typeof(module.exports) !== 'undefined') { 
@@ -202,5 +224,7 @@ if (typeof(module) !== 'undefined' && typeof(module.exports) !== 'undefined') {
         fillBoard,
         checkResponse,
         validateBoard,
+        resetColours,
+        validate,
     } 
 }
