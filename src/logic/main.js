@@ -163,7 +163,7 @@ function validateBoard() {
             var boxElementA = document.getElementById("cell" + (String)(i+1) + (String)(j+1));
             var rowElementA = document.getElementById("cell" + (String)(Math.floor((j+3)/3) + 3*Math.floor(i/3)) + (String)(3*(i%3) + j%3 + 1));
             var colElementA = document.getElementById("cell" + (String)(Math.floor((i+3)/3) + 3*Math.floor(j/3)) + (String)(3*(j%3) + i%3 + 1));
-            if(!boxElementA.disabled  && (typeof(boxElementA.value) !== "number" || boxElementA.value < 1 || 9 < boxElementA.value)) {
+            if(!boxElementA.disabled  && (typeof(Number(boxElementA.value)) !== "number" || boxElementA.value < 1 || 9 < boxElementA.value)) {
                 if(boxElementA.value === "") {
                     boxElementA.style.backgroundColor = pastelYellow;
                 } else {
@@ -195,7 +195,6 @@ function validateBoard() {
             }
         }
     }
-    console.log(document.getElementById("cell11").value==='');
     resetColor();
     if(valid){
         document.getElementById('resultMSG').innerText = "success";
