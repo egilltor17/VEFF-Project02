@@ -61,3 +61,18 @@ describe('checkResponse()', () => {
                                                                                ["7", "9", "6", "5", "2", "1", "8", "3", "."]] } } })).to.be.true;
     });
 });
+
+describe("isInteger()", () => {
+
+    it("should return true when integer is passed", () => {
+        chai.expect(main.isInteger('4')).to.be.true;
+        chai.expect(main.isInteger(1)).to.be.true;
+        chai.expect(main.isInteger('10e4')).to.be.true;
+    });
+    
+    it("should return false when non integer is passed", () => {
+        chai.expect(main.isInteger('s')).to.be.false;
+        chai.expect(main.isInteger(NaN)).to.be.false;
+        chai.expect(main.isInteger(9.34)).to.be.false;
+    });
+});

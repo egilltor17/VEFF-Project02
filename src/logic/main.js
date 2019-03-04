@@ -9,14 +9,11 @@ async function generateBoard(){
     document.getElementById("resultMSG").innerText = ""
     await sendSudokuRequest(difficulty);
     
-    // mawait new Promise((resolve, reject) => setTimeout(resolve, 3000));
-    
-    // fillBoard(_responce);
 }
 
 async function sendSudokuRequest(dif){
-    //The URL to which we will send the request
     var responce;
+    //The URL to which we will send the request
     var url = 'https://veff213-sudoku.herokuapp.com/api/v1/sudoku/';
 
     //Perform an AJAX POST request to the url, and set the param 'myParam' in the request body to paramValue
@@ -25,7 +22,6 @@ async function sendSudokuRequest(dif){
             responce = res;
         })
         .catch((error) => {
-            //When unsuccessful, print the error.
             console.log(error);
         })
         .then(() => {
@@ -44,13 +40,13 @@ function clearBoard() {
     }
 }
 
-function fillBoard(responce) {
+function fillBoard(responce) { // fill the board with 
     var boxes;
     var sudokuId;
     if(checkResponse(responce)) {
         boxes = responce.data.board.boxes;
         sudokuId = responce.data.board._id;
-    } else {
+    } else { // Set default boards to generate when server is down
         var difficulty = document.getElementById('difficultySelector').value;
         if(difficulty === "easy") {
             boxes = [["5", "6", "4", ".", ".", "3", "2", ".", "1"], 
@@ -117,7 +113,7 @@ function checkResponse(response) {
     return true;
 } 
 
-function resetColor(){
+function resetColor(){ //reset colours with timeout after validate
     setTimeout(function background() {
         for(var i = 0; i < 9; i++){
             for(var j = 0; j < 9; j++) {
@@ -130,8 +126,8 @@ function resetColor(){
     },5000);
 }
 
-function isInteger(boxElementA) {
-    var isAnInteger = boxElementA.value % 2;
+function isInteger(value) { //Check if tile value is a valid integer
+    var isAnInteger = value % 2;
     if(isAnInteger != 0 && isAnInteger != 1){
         isAnInteger = false;
     }
@@ -141,7 +137,7 @@ function isInteger(boxElementA) {
     return isAnInteger
 }
 
-function validateBoard() {
+function validateBoard() { // Check board for all rules
     var valid = true;
     for(var i = 0; i < 9; i++) {            // All blocks, rows or columns
         for(var j = 0; j < 9; j++) {        // All cells
@@ -149,7 +145,7 @@ function validateBoard() {
             var boxElementA = document.getElementById("cell" + (String)(i+1) + (String)(j+1));
             var rowElementA = document.getElementById("cell" + (String)(Math.floor((j+3)/3) + 3*Math.floor(i/3)) + (String)(3*(i%3) + j%3 + 1));
             var colElementA = document.getElementById("cell" + (String)(Math.floor((i+3)/3) + 3*Math.floor(j/3)) + (String)(3*(j%3) + i%3 + 1));
-            if(!boxElementA.disabled  && (!isInteger(boxElementA) || boxElementA.value < 1 || 9 < boxElementA.value)) {
+            if(!boxElementA.disabled  && (!isInteger(boxElementA.value) || boxElementA.value < 1 || 9 < boxElementA.value)) {
                 if(boxElementA.value === "") {
                     boxElementA.style.backgroundColor = pastelYellow;
                 } else {
@@ -181,7 +177,6 @@ function validateBoard() {
             }
         }
     }
-    console.log(document.getElementById("cell11").value==='');
     resetColor();
     if(valid){
         document.getElementById('resultMSG').innerText = "success";
@@ -203,5 +198,6 @@ if (typeof(module) !== 'undefined' && typeof(module.exports) !== 'undefined') {
         checkResponse,
         validateBoard,
         resetColor,
+        isInteger,
     } 
 }
