@@ -155,17 +155,6 @@ function resetColor(){
     },5000);
 }
 
-function isInteger(boxElementA) {
-    var isAnInteger = boxElementA.value % 2;
-    if(isAnInteger != 0 && isAnInteger != 1){
-        isAnInteger = false;
-    }
-    else {
-        isAnInteger = true;
-    }
-    return isAnInteger
-}
-
 function validateBoard() {
     var valid = true;
     for(var i = 0; i < 9; i++) {          // All blocks, rows or columns
@@ -173,8 +162,8 @@ function validateBoard() {
             var boxElementA = document.getElementById("cell" + (String)(i+1) + (String)(j+1));
             var rowElementA = document.getElementById("cell" + (String)(Math.floor((j+3)/3) + 3*Math.floor(i/3)) + (String)(3*(i%3) + j%3 + 1));
             var colElementA = document.getElementById("cell" + (String)(Math.floor((i+3)/3) + 3*Math.floor(j/3)) + (String)(3*(j%3) + i%3 + 1));
-            if(!boxElementA.disabled  && (!isInteger(boxElementA) || boxElementA.value < 1 || 9 < boxElementA.value)) {
-                if(boxElementA.value == "") {
+            if(!boxElementA.disabled  && (typeof(boxElementA.value) !== "number" || boxElementA.value < 1 || 9 < boxElementA.value)) {
+                if(boxElementA.value === "") {
                     boxElementA.style.backgroundColor = pastelYellow;
                 } else {
                     boxElementA.style.backgroundColor = pastelRed;
@@ -187,24 +176,21 @@ function validateBoard() {
                 var rowElementB = document.getElementById("cell" + (String)(Math.floor((k+3)/3) + 3*Math.floor(i/3)) + (String)(3*(i%3) + k%3 + 1));
                 var colElementB = document.getElementById("cell" + (String)(Math.floor((i+3)/3) + 3*Math.floor(k/3)) + (String)(3*(k%3) + i%3 + 1));
                 
-                if(boxElementA.value != "" && boxElementA.value === boxElementB.value) {
+                if(boxElementA.value !== "" && boxElementA.value === boxElementB.value) {
                     if(!boxElementA.disabled) { boxElementA.style.backgroundColor = pastelRed; }
                     if(!boxElementB.disabled) { boxElementB.style.backgroundColor = pastelRed; }
                     valid = false;
                 }
-                if(rowElementA.value != "" && rowElementA.value === rowElementB.value) {
+                if(rowElementA.value !== "" && rowElementA.value === rowElementB.value) {
                     if(!rowElementA.disabled) { rowElementA.style.backgroundColor = pastelRed; }
                     if(!rowElementB.disabled) { rowElementB.style.backgroundColor = pastelRed; }
                     valid = false;
                 }
-                if(colElementA.value != "" && colElementA.value === colElementB.value) {
+                if(colElementA.value !== "" && colElementA.value === colElementB.value) {
                     if(!colElementA.disabled) { colElementA.style.backgroundColor = pastelRed; }
                     if(!colElementB.disabled) { colElementB.style.backgroundColor = pastelRed; }
                     valid = false;
                 }
-
-
-
             }
         }
     }
