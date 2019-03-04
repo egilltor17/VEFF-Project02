@@ -156,6 +156,17 @@ function resetColor(){
     },5000);
 }
 
+function isInteger(boxElementA) {
+    var isAnInteger = boxElementA.value % 2;
+    if(isAnInteger != 0 && isAnInteger != 1){
+        isAnInteger = false;
+    }
+    else {
+        isAnInteger = true;
+    }
+    return isAnInteger
+}
+
 function validateBoard() {
     var valid = true;
     for(var i = 0; i < 9; i++) {          // All blocks, rows or columns
@@ -163,7 +174,7 @@ function validateBoard() {
             var boxElementA = document.getElementById("cell" + (String)(i+1) + (String)(j+1));
             var rowElementA = document.getElementById("cell" + (String)(Math.floor((j+3)/3) + 3*Math.floor(i/3)) + (String)(3*(i%3) + j%3 + 1));
             var colElementA = document.getElementById("cell" + (String)(Math.floor((i+3)/3) + 3*Math.floor(j/3)) + (String)(3*(j%3) + i%3 + 1));
-            if(!boxElementA.disabled  && (typeof(boxElementA.value) !== "number" || boxElementA.value < 1 || 9 < boxElementA.value)) {
+            if(!boxElementA.disabled  && (!isInteger(boxElementA) || boxElementA.value < 1 || 9 < boxElementA.value)) {
                 if(boxElementA.value === "") {
                     boxElementA.style.backgroundColor = pastelYellow;
                 } else {
